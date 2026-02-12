@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import '../../../../model/ride/locations.dart';
 import '../../../../model/ride_pref/ride_pref.dart';
 import '../../../widgets/bla_button.dart';
+import '../../../../services/locations_service.dart';
 import '../../../theme/theme.dart';
 import '../../../../utils/date_time_utils.dart';
 import '../../../widgets/display/bla_divider.dart';
 import 'form_picker.dart';
+import 'location_picker.dart';
 
 ///
 /// A Ride Preference From is a view to select:
@@ -49,12 +51,40 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // Handle events
   // ----------------------------------
 
-  void _onDeparturePressed() {
-    // TODO: Implement location picker
+  void _onDeparturePressed() async {
+    final Location? selectedLocation = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LocationPicker(
+          locations: LocationsService.availableLocations,
+          selected: departure,
+        ),
+      ),
+    );
+
+    if (selectedLocation != null) {
+      setState(() {
+        departure = selectedLocation;
+      });
+    }
   }
 
-  void _onArrivalPressed() {
-    // TODO: Implement location picker
+  void _onArrivalPressed() async {
+    final Location? selectedLocation = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LocationPicker(
+          locations: LocationsService.availableLocations,
+          selected: arrival,
+        ),
+      ),
+    );
+
+    if (selectedLocation != null) {
+      setState(() {
+        arrival = selectedLocation;
+      });
+    }
   }
 
   void _onDatePressed() async {
