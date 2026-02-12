@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme/theme.dart';
+import '../theme/theme.dart';
 import '../widgets/bla_button.dart';
 
 const String blablaHomeImagePath = 'assets/images/blabla_home.png';
